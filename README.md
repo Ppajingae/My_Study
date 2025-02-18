@@ -6,7 +6,8 @@
 ## 01. BackEnd 공부
 ### ㄴ [01. Language](./01_BackEnd공부/01_Language)
 ### ㄴㄴ [01-1. Java](./01_BackEnd공부/01_Language/01_Java)
-#### ㄴㄴㄴㄴ [1. Java란??](./01_BackEnd공부/01_Language/01_Java/01_Java란.md)
+#### ㄴㄴㄴㄴ [1. Java 란??](./01_BackEnd공부/01_Language/01_Java/01_Java란.md)
+#### ㄴㄴㄴㄴ [2. Java 기초 문법](./01_BackEnd공부/01_Language/01_Java/01_Java란.md)
 ### ㄴㄴ [01-2. Kotlin](./01_BackEnd공부/01_Language/02_Kotlin)
 ### ㄴㄴ [01-3. Python](./01_BackEnd공부/01_Language/03_Python)
 ### ㄴㄴ [01-4. TypeScript](./01_BackEnd공부/01_Language/04_TypeScript)
