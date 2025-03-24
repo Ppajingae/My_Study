@@ -1,0 +1,51 @@
+name: Create GitHub Discussion Daily
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # 매일 00:00 UTC (한국 시간 09:00)
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  create-discussion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "DATE=$(date -u '+%m/%d (%a)')" >> $GITHUB_ENV
+
+      - name: Create GitHub Discussion
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          gh api graphql -f query='
+            mutation {
+              createDiscussion(input: {
+                repositoryId: "'"$(gh api graphql -f query='{repository(owner:\"OWNER\", name:\"REPO\"){id}}' --jq '.data.repository.id')"'",
+                categoryId: "CATEGORY_ID",
+                title: "'"${{ env.DATE }} My Study Diary"'",
+                body: "
+                ## 📅 ${{ env.DATE }} My Study Diary  
+                오늘의 기여 내용을 아래 양식에 맞춰 작성해주세요.  
+
+                ---
+
+                ### ✨ 오늘 한 일
+                - ✅  
+                - ✅  
+
+                ### 💡 배운 점 & 고민 사항
+                - 🤔  
+                - 🤔  
+
+                ### 🎯 내일 목표
+                - 🎯  
+                - 🎯  
+
+                ---
+                "
+              }) {
+                discussion {
+                  url
+                }
+              }
+            }'
