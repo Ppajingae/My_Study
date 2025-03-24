@@ -17,7 +17,7 @@ jobs:
         id: repo
         env:
           GH_TOKEN: ${{ github.token }}
-        run: echo "REPO_ID=$(gh api graphql -f query=' { repository(owner:\"Ppajingae\", name:\"My_Study\") {id} }' --jq '.data.repository.id')" >> $GITHUB_ENV
+        run: echo "REPO_ID=$(gh api graphql -f query=' { repository(owner:\"Ppajingae\", name:\"My_Study\") {id} }'" >> $GITHUB_ENV
 
       - name: Create GitHub Discussion
         env:
