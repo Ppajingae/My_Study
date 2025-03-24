@@ -20,7 +20,7 @@ jobs:
           gh api graphql -f query='
             mutation {
               createDiscussion(input: {
-                repositoryId: "'"$(gh api graphql -f query='{repository(owner: "Ppajingae", name: "My_Study"){id}})"'",
+                repositoryId: "'"$(gh api graphql -f query='{repository(owner:\"Ppajingae\", name:\"My_Study\"){id}}' | grep -o '"id":"[^"]*"' | cut -d':' -f2 | tr -d '"')"'",
                 categoryId: "DIC_kwDON6BBHc4CoaKM",
                 title: "'"${{ env.DATE }} My Study Diary"'",
                 body: "
