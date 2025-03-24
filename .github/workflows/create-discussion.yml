@@ -2,7 +2,7 @@ name: Create GitHub Discussion Daily
 
 on:
   schedule:
-    - cron: "25 1 * * *"  # 매일 00:00 UTC (한국 시간 09:00)
+    - cron: "0 0 * * *"  # 매일 00:00 UTC (한국 시간 09:00)
   workflow_dispatch:  # 수동 실행 가능
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
           gh api graphql -f query='
             mutation {
               createDiscussion(input: {
-                repositoryId: "'"$(gh api graphql -f query='{repository(owner:\"Ppajingae\", name:\"My_Study\"){id}}' --jq '.data.repository.id')"'",
+                repositoryId: "'"$(gh api graphql -f query='{repository(owner: "Ppajingae", name: "My_Study"){id}}' --jq '.data.repository.id')"'",
                 categoryId: "DIC_kwDON6BBHc4CoaKM",
                 title: "'"${{ env.DATE }} My Study Diary"'",
                 body: "
