@@ -12,6 +12,7 @@ jobs:
       - name: Get current date
         id: date
         run: echo "DATE=$(date -u '+%m/%d (%a)')" >> $GITHUB_ENV
+          echo "REPO_ID=$(gh api graphql -f query='{repository(owner:\"Ppajingae\", name:\"My_Study\"){id}}' --jq '.data.repository.id')" >> $GITHUB_ENV
 
       - name: Create GitHub Discussion
         env:
@@ -20,7 +21,7 @@ jobs:
           gh api graphql -f query='
             mutation {
               createDiscussion(input: {
-                repositoryId: "'"$(gh api graphql -f query='{repository(owner:\"Ppajingae\", name:\"My_Study\"){id}}' | grep -o '"id":"[^"]*"' | cut -d':' -f2 | tr -d '"')"'",
+                repositoryId: "'"${{ env.REPO_ID }}"'",
                 categoryId: "DIC_kwDON6BBHc4CoaKM",
                 title: "'"${{ env.DATE }} My Study Diary"'",
                 body: "
